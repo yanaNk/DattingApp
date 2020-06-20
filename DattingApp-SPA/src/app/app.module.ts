@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { RouterModule } from '@angular/router';
+import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppComponent } from './app.component';
@@ -49,6 +50,7 @@ export function tokenGetter() {
       BsDropdownModule.forRoot(),
       TabsModule.forRoot(),
       RouterModule.forRoot(appRoutes),
+      NgxGalleryModule,
       JwtModule.forRoot({
         config: {
           tokenGetter,
