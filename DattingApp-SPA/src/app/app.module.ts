@@ -1,3 +1,4 @@
+import { ListsResolver } from './_resolvers/list.resolver';
 import { Pagination } from './_models/pagination';
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -84,7 +85,8 @@ export function tokenGetter() {
       MemberDetailResolver,
       MemberListResolver,
       MemberEditResolver,
-      PreventUnsavedChanges
+      PreventUnsavedChanges,
+      ListsResolver
    ],
    bootstrap: [
       AppComponent
