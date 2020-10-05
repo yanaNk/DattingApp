@@ -103,7 +103,7 @@ namespace DatingApp.API.Controllers {
 
             if ( userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                  return Unauthorized();
-                 
+
             var messageFromRepo = await _repository.GetMessage(id);
             if (messageFromRepo.SenderId == userId) 
                 messageFromRepo.SenderDeleted = true;
@@ -115,6 +115,27 @@ namespace DatingApp.API.Controllers {
                 return NoContent();
             
             throw new Exception("Error on deleting message");
+
+        }
+
+        [HttpPost("{id}/read")]
+        public async Task<IActionResult> MarkMessageAsRead(int id,int userId) {
+
+            if ( userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                 return Unauthorized();
+
+            var messageFromRepo = await _repository.GetMessage(id);
+            if (messageFromRepo.RecipientId != userId)
+                return Unauthorized();
+
+            messageFromRepo.IsRead = true;
+            messageFromRepo.DateRead = DateTime.Now;
+
+            if (await _repository.SaveAll())
+                return NoContent();
+
+            throw new Exception("could not mark this message as read");
+
 
         }
 
