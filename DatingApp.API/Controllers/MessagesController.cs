@@ -111,6 +111,9 @@ namespace DatingApp.API.Controllers {
             if (messageFromRepo.RecipientId == userId)
                 messageFromRepo.RecipientDeleted = true;
 
+            if (messageFromRepo.SenderDeleted && messageFromRepo.RecipientDeleted)
+                _repository.Delete(messageFromRepo);
+
             if ( await _repository.SaveAll())
                 return NoContent();
             
