@@ -13,7 +13,6 @@ using System;
 namespace DatingApp.API.Controllers {
     [ServiceFilter (typeof (LogUserActivity))]
     [ApiController]
-    [Authorize]
     [Route ("api/users/{userId}/[controller]")]
     public class MessagesController:ControllerBase {
         

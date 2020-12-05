@@ -15,6 +15,7 @@ decodedToken: any;
 currentUser: User;
 photoUrl = new BehaviorSubject<string>('../../assets/user.png');
 currentPhotoUrl = this.photoUrl.asObservable();
+userRoles: string[];
 
 changeMemberPhoto(photoUrl: string) {
   this.photoUrl.next(photoUrl);
@@ -45,5 +46,17 @@ register(user: User) {
 loggedIn() {
   const token = localStorage.getItem('token');
   return !this.jwtHelper.isTokenExpired(token);
+}
+
+roleMatch(allowedRoles): boolean {
+  let isMatch = false;
+  const userRoles = this.decodedToken.role as Array<string>;
+  allowedRoles.forEach(element => {
+    if (userRoles.includes(element)) {
+      isMatch = true;
+      return;
+    }
+  });
+  return isMatch;
 }
 }

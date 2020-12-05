@@ -13,6 +13,7 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
 import { resolve } from 'dns';
 import { MemberEditResolver } from './_resolvers/member-edit-resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 
 
 
@@ -32,7 +33,8 @@ export const appRoutes: Routes = [
       {path: 'lists', component: ListsComponent,
         resolve: {users: ListsResolver}},
       {path: 'messages', component: MessagesComponent,
-        resolve: {messages: MessageResolver}}
+        resolve: {messages: MessageResolver}},
+        {path: 'admin', component: AdminPanelComponent, data: {roles: ['Admin', 'Moderator']}},
     ]
   },
   {path: '**', redirectTo: '', pathMatch: 'full'},
